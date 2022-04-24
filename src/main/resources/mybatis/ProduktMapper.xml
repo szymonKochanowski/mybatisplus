@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springbootmybatis.mapper.ProduktMapper">
+
+    <resultMap type="com.springbootmybatis.entity.Produkt" id="produktResultMap">
+        <id column="id_produktu" property="id_produktu"/>
+        <result column="producent" property="producent"/>
+        <result column="model" property="model"/>
+        <result column="kategoria" property="kategoria"/>
+        <result column="cena" property="cena"/>
+    </resultMap>
+
+    <select id="getAllProduktyWithProducentName" resultMap="produktResultMap">
+        select sklep.produkty.id_produktu, producenci.nazwa, produkty.model, produkty.kategoria, produkty.cena
+        from sklep.produkty
+        inner join producenci
+        on produkty.producent = producenci.id_producenta
+    </select>
+
+
+
+<!--    <insert id="addNewProdukt" parameterType="produktResultMap" useGeneratedKeys="true" keyProperty="id_produktu">-->
+<!--        INSERT INTO produkt (producent, model, kategoria, cena)-->
+<!--        VALUES (#{producent}, #{model}, #{kategoria}, #{cena})-->
+<!--    </insert>-->
+
+</mapper>
