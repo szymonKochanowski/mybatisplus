@@ -1,11 +1,12 @@
 package com.springbootmybatis.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Data
 @TableName("products")
@@ -17,9 +18,20 @@ public class Product extends Model<Product> {
     @TableField(value = "producer_id")
     private Integer producerId;
 
-    private String model;
+    @NotNull
+    @NotBlank
+    private String name;
 
+    @NotNull
+    @NotBlank
     private String category;
 
-    private Integer price;
+    @NotNull
+    private Double price;
+
+    @TableField(fill = FieldFill.INSERT, value = "created_on")
+    private Timestamp createdOn;
+
+    @TableField(fill = FieldFill.INSERT, value = "expiration_date")
+    private Timestamp expirationDate;
 }

@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springbootmybatis.entity.Producer;
 import com.springbootmybatis.mapper.ProducerMapper;
 import com.springbootmybatis.service.IProducerService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ProducerServiceImpl extends ServiceImpl<ProducerMapper, Producer> implements IProducerService {
 
     @Resource
@@ -21,14 +24,20 @@ public class ProducerServiceImpl extends ServiceImpl<ProducerMapper, Producer> i
 
     @Override
     public Producer addNewProducer(Producer producer) {
-       producer.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
-       producerMapper.insert(producer);
-       return producer;
+            producer.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+            producerMapper.insert(producer);
+            return producer;
     }
 
     @Override
-    public Producer getProducerById(Integer producerId) {
-        return producerMapper.selectById(producerId);
+    public Producer getProducerById(Integer producerId) throws NotFoundException {
+        Producer producer = producerMapper.selectById(producerId);
+        if (producer != null) {
+            return producer;
+        } else {
+            log.error("Error in method getProducerById! Producer with id '" + producerId + "' not found!");
+            throw new NotFoundException("Producer with id '" + producerId + "' not found!");
+        }
     }
 
     @Override
@@ -38,17 +47,31 @@ public class ProducerServiceImpl extends ServiceImpl<ProducerMapper, Producer> i
     }
 
     @Override
-    public Producer editProducerById(Integer producerId, Producer producer) {
-        UpdateWrapper updateWrapper = new UpdateWrapper();
-        updateWrapper.eq("producer_id", producerId);
-        producerMapper.update(producer, updateWrapper);
-        return producer;
+    public Producer editProducerById(Integer producerId, Producer producer) throws NotFoundException {
+        Producer producerFromDb = producerMapper.selectById(producerId);
+        if (producerFromDb != null) {
+            producerFromDb.setName(producer.getName());
+            producerFromDb.setCountry(producer.getCountry());
+            UpdateWrapper<Producer> updateWrapper = new UpdateWrapper();
+            updateWrapper.eq("producer_id", producerId);
+            producerMapper.update(producerFromDb, updateWrapper);
+            return producerFromDb;
+        } else {
+            log.error("Error in method editProducerById! Producer with id '" + producerId + " not found!");
+            throw new NotFoundException("Producer with id '" + producerId + " not found!");
+        }
     }
 
     @Override
-    public String deleteProducerById(Integer producerId) {
-        producerMapper.deleteById(producerId);
-        return "Producer with id '" + producerId + "' deleted succesfully!";
+    public String deleteProducerById(Integer producerId) throws NotFoundException {
+        Producer producer = producerMapper.selectById(producerId);
+        if (producer != null) {
+            producerMapper.deleteById(producerId);
+            return "Producer with id '" + producerId + "' deleted succesfully!";
+        } else {
+            log.error("Error in method deleteProducerById! Producer with id '" + producerId + " not found!");
+            throw new NotFoundException("Producer with id '" + producerId + " not found!");
+        }
     }
 
     @Override
