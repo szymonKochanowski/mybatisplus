@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
+public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Autowired
     ProductMapper productMapper;
@@ -64,6 +64,5 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
         queryWrapper.like("model", keywordInModel);
         return productMapper.selectList(queryWrapper);
     }
-
 
 }

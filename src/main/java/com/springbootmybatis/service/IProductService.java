@@ -26,4 +26,5 @@ public interface IProductService extends IService<Product> {
     List<Product> getProductsListByPriceBetween(Integer startPrice, Integer endPrice);
 
     List<Product> getProductsListByKeywordInProductModel(String keywordInModel);
+
 }
