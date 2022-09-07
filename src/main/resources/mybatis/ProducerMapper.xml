@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springbootmybatis.mapper.ProducerMapper">
+
+    <resultMap type="com.springbootmybatis.entity.Producer" id="producerResultMap">
+        <id column="producer_id" property="producerId"/>
+        <result column="name" property="name"/>
+        <result column="created_on" property="createdOn"/>
+        <result column="country" property="country"/>
+    </resultMap>
+
+    <select id="getProducersListByProductsCategory" resultMap="producerResultMap">
+        select pro.*
+        from sklep.producents pro
+        inner join sklep.products p
+        on p.producer_id = pro.producer_id
+        <if test="productCategory != null and productCategory != ''">
+            where p.category like concat('%', #{productCategory}, '%')
+        </if>
+    </select>
+
+</mapper>
