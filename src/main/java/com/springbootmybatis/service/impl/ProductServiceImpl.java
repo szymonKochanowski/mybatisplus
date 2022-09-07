@@ -52,16 +52,16 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public List<Product> getProductsListByPriceBetween(Integer startPrice, Integer endPrice) {
+    public List<Product> getProductsListByPriceBetween(Double startPrice, Double endPrice) {
         QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
         queryWrapper.between("price", startPrice, endPrice);
         return productMapper.selectList(queryWrapper);
     }
 
     @Override
-    public List<Product> getProductsListByKeywordInProductModel(String keywordInModel) {
+    public List<Product> getProductsListByKeywordInProductName(String keywordInName) {
         QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("model", keywordInModel);
+        queryWrapper.like("name", keywordInName);
         return productMapper.selectList(queryWrapper);
     }
 

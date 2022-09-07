@@ -23,8 +23,8 @@ public interface IProductService extends IService<Product> {
 
     Product updateProduct(Integer productId, Product product);
 
-    List<Product> getProductsListByPriceBetween(Integer startPrice, Integer endPrice);
+    List<Product> getProductsListByPriceBetween(Double startPrice, Double endPrice);
 
-    List<Product> getProductsListByKeywordInProductModel(String keywordInModel);
+    List<Product> getProductsListByKeywordInProductName(String keywordInModel);
 
 }

@@ -8,9 +8,11 @@
     <resultMap type="com.springbootmybatis.entity.Product" id="productResultMap">
         <id column="product_id" property="productId"/>
         <result column="producer_id" property="producerId"/>
-        <result column="model" property="model"/>
+        <result column="name" property="name"/>
         <result column="category" property="category"/>
         <result column="price" property="price"/>
+        <result column="created_on" property="createdOn"/>
+        <result column="expiration_date" property="expirationDate"/>
     </resultMap>
 
     <select id="getProductsListByKeywordInProducerName" resultMap="productResultMap">

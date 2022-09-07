@@ -1,3 +1,6 @@
+--liquibase formatted sql
+--changeset skochanowski:1
+
 create table if not exists `sklep`.`producents` (
 producer_id int AUTO_INCREMENT PRIMARY KEY,
 name varchar(255),

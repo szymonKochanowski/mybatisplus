@@ -1,5 +1,8 @@
 
-- dodac moze jeszcze klase kategorii
+Used programing language: Java v.11.
+- Srping: Web, Validation,
+- Mybatis Plus,
+- Liquibase,
+
 - dodac wychwytywanie bledow i ich obsluge?
-- do produktow dodac jeszcze moze date ich powstania i waznosci
-- dodac change logi?
+- dodac testy jednostkowe
