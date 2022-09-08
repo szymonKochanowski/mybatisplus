@@ -2,6 +2,7 @@ package com.springbootmybatis.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.springbootmybatis.entity.Product;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Primary
 public interface IProductService extends IService<Product> {
 
-    Product getProductById(Integer productId);
+    Product getProductById(Integer productId) throws NotFoundException;
 
     List<Product> getAllProducts();
 
@@ -19,9 +20,9 @@ public interface IProductService extends IService<Product> {
 
     List<Product> getProductsListByKeywordInProducerName(String producerName);
 
-    void deleteProduct(Integer productId);
+    void deleteProduct(Integer productId) throws NotFoundException;
 
-    Product updateProduct(Integer productId, Product product);
+    Product updateProduct(Integer productId, Product product) throws NotFoundException;
 
     List<Product> getProductsListByPriceBetween(Double startPrice, Double endPrice);
 

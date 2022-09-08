@@ -1,8 +1,8 @@
 
 Used programing language: Java v.11.
-- Srping: Web, Validation,
+Used libraries and frameworks:
+- Spring: Web, Validation,
 - Mybatis Plus,
 - Liquibase,
 
-- dodac wychwytywanie bledow i ich obsluge?
-- dodac testy jednostkowe
+- dodac testy
