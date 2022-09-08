@@ -19,7 +19,7 @@ import java.util.List;
 public class ProducerController {
 
     @Autowired
-    IProducerService producerService;
+    private IProducerService producerService;
 
     @PostMapping("/add")
     public ResponseEntity<Producer> addNewProducer(@Valid @RequestBody Producer producer) {

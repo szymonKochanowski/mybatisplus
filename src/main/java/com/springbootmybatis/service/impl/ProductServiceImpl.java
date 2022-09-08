@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Autowired
-    ProductMapper productMapper;
+    private ProductMapper productMapper;
 
     @Override
     public Product getProductById(Integer productId) throws NotFoundException {
@@ -46,7 +46,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public void deleteProduct(Integer productId) throws NotFoundException {
+    public void deleteProductById(Integer productId) throws NotFoundException {
         Product product = productMapper.selectById(productId);
         if (product != null) {
             productMapper.deleteById(productId);

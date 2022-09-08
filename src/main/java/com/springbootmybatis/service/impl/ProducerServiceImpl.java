@@ -67,7 +67,7 @@ public class ProducerServiceImpl extends ServiceImpl<ProducerMapper, Producer> i
         Producer producer = producerMapper.selectById(producerId);
         if (producer != null) {
             producerMapper.deleteById(producerId);
-            return "Producer with id '" + producerId + "' deleted succesfully!";
+            return "Producer with id '" + producerId + "' deleted successfully!";
         } else {
             log.error("Error in method deleteProducerById! Producer with id '" + producerId + " not found!");
             throw new NotFoundException("Producer with id '" + producerId + " not found!");
@@ -100,5 +100,5 @@ public class ProducerServiceImpl extends ServiceImpl<ProducerMapper, Producer> i
         return producerMapper.getProducersListByProductsCategory(productCategory);
     }
 
-
 }
+
