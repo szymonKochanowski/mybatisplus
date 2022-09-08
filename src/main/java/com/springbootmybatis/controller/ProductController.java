@@ -18,7 +18,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    IProductService productService;
+    private IProductService productService;
 
 
     @PostMapping("/add")
@@ -54,10 +54,10 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer productId) {
+    public ResponseEntity<Void> deleteProductById(@PathVariable Integer productId) {
         log.info("Start to delete product by id: " + productId + ".");
         try {
-            productService.deleteProduct(productId);
+            productService.deleteProductById(productId);
             log.info("Product with id: " + productId + " deleted successfully.");
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (NotFoundException e) {
@@ -79,7 +79,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductsListByPriceBetween(optionalStartPrice, optionalEndPrice));
     }
 
-    @GetMapping("/model")
+    @GetMapping("/name")
     public ResponseEntity<List<Product>> getProductByKeywordInProductName(@RequestParam String keywordInName) {
         log.info("Start to get products list by keyword '" + keywordInName + "' in product name.");
         return ResponseEntity.ok(productService.getProductsListByKeywordInProductName(keywordInName));

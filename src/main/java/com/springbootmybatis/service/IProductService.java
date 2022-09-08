@@ -20,7 +20,7 @@ public interface IProductService extends IService<Product> {
 
     List<Product> getProductsListByKeywordInProducerName(String producerName);
 
-    void deleteProduct(Integer productId) throws NotFoundException;
+    void deleteProductById(Integer productId) throws NotFoundException;
 
     Product updateProduct(Integer productId, Product product) throws NotFoundException;
 
