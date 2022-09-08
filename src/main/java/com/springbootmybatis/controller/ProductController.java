@@ -3,6 +3,7 @@ package com.springbootmybatis.controller;
 import com.springbootmybatis.entity.Product;
 import com.springbootmybatis.service.IProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,11 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable Integer productId) {
         log.info("Start to get  product by id: " + productId + ".");
-        return ResponseEntity.ok(productService.getProductById(productId));
+        try {
+            return ResponseEntity.ok(productService.getProductById(productId));
+        } catch (NotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/all")
@@ -41,15 +46,23 @@ public class ProductController {
     @PutMapping("/update/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable Integer productId, @Valid @RequestBody Product product) {
         log.info("Start to update product by id: " + productId + ".");
-        return ResponseEntity.ok(productService.updateProduct(productId, product));
+        try {
+            return ResponseEntity.ok(productService.updateProduct(productId, product));
+        } catch (NotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer productId) {
         log.info("Start to delete product by id: " + productId + ".");
-        productService.deleteProduct(productId);
-        log.info("Product with id: " + productId + " deleted successfully.");
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        try {
+            productService.deleteProduct(productId);
+            log.info("Product with id: " + productId + " deleted successfully.");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (NotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/producer/name")
