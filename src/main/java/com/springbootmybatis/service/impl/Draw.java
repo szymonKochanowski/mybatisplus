@@ -57,21 +57,21 @@ public class Draw implements Stars {
         isOddNumber(n);
         int numberOfDownRows = n / 2;
         String upPartOfDiamond = drawIsoscelesTriangle(Integer.parseInt(String.valueOf(n / 2 + 1)));
-        StringBuilder downPartOfDiamnond = new StringBuilder(upPartOfDiamond);
+        StringBuilder downPartOfDiamond = new StringBuilder(upPartOfDiamond);
         int amountStarsInRow = n - 2;
         int amountDashInRow = 1;
         for (int i = 0; i < numberOfDownRows; i++) {
             for (int z = 0; z < amountDashInRow; z++) {
-                downPartOfDiamnond.append(DASH);
+                downPartOfDiamond.append(DASH);
             }
             for (int s = 0; s < amountStarsInRow; s++) {
-                downPartOfDiamnond.append(STAR);
+                downPartOfDiamond.append(STAR);
             }
             amountDashInRow += 1;
             amountStarsInRow -= 2;
-            downPartOfDiamnond.append(NEW_LINE);
+            downPartOfDiamond.append(NEW_LINE);
         }
-        return downPartOfDiamnond.toString();
+        return downPartOfDiamond.toString();
     }
 
     private boolean isOddNumber(int n) {

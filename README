@@ -1,8 +1,19 @@
+Project created to learn MyBatis Plus instead of Spring JPA and JDBC to perform SQL query also with the case,
+when need to use, joins columns for two different tables.
 
 Used programing language: Java v.11.
 Used libraries and frameworks:
-- Spring: Web, Validation,
+- Spring: Web, Validation, Test,
 - Mybatis Plus,
 - Liquibase,
+- MySQL,
+- Lombok.
 
-- dodac testy
+Application allows for:
+- regarding Producer entity class: addNewProducer, getProducerById, getAllProducers, editProducerById, deleteProducerById,
+getProducersListByKeywordInName, getProducersListByKeywordInCountry, getProducersListByCreateOnBetween, getProducersListByProductsCategory;
+- regarding Product entity class: addProduct, getProductById, getAllProducts, updateProduct, deleteProductById,
+getProductsListByKeywordInProducerName, getProductsListByPriceBetween, getProductByKeywordInProductName.
+
+Application was testes using unit and integration tests for controllers and services.
+Test coverage is 92% with excluded mapper package and class Draw.
