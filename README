@@ -16,4 +16,4 @@ getProducersListByKeywordInName, getProducersListByKeywordInCountry, getProducer
 getProductsListByKeywordInProducerName, getProductsListByPriceBetween, getProductByKeywordInProductName.
 
 Application was testes using unit and integration tests for controllers and services.
-Test coverage is 92% with excluded mapper package and class Draw.
+Test coverage is 99% with excluded mapper package.
